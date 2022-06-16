@@ -5,9 +5,15 @@ Example: If the user tells the chess piece to go from [0,0] to [7,7], opposite c
 You made it in 6 moves! Here's your path: 
 
 [0, 0]
+
 [2, 1]
+
 [4, 2]
+
 [6, 3]
+
 [7, 5]
+
 [5, 6]
+
 [7, 7]
