@@ -7,7 +7,7 @@ class Node
   end
 end
 
-class Options
+class Knight
   def initialize()
     @possibilities = [[1, 2], [2, 1], [-1, 2], [1, -2], [-2, 1], [2, -1], [-1, -2], [-2, -1]]
     @used = []
@@ -74,6 +74,6 @@ class Options
   end
 end
 
-knight = Options.new
+knight = Knight.new
 
 knight.nextMove([0, 0], [7, 7])
