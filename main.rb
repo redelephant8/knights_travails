@@ -1,3 +1,4 @@
+require 'pry'
 class Node
     attr_accessor :data, :child, :parent
 
@@ -11,6 +12,7 @@ end
 class Options
     def initialize()
         @possibilities = [[1, 2], [2, 1], [-1, 2], [1, -2], [-2, 1], [2, -1], [-1, -2], [-2, -1]]
+        @used = []
     end
 
     def nextMove(data, goal)
@@ -19,24 +21,39 @@ class Options
         if data == [[4, 4]]
             root = Node.new(data)
         end
-
-        data.each do |arr|
-            @possibilities.each do |num|
-                x = arr[0] + num[0]
-                y = arr[1] + num[1]
-                temp.push([x, y])
+        queue = [data]
+        while queue 
+            data.each do |arr|
+                temp = getNext(arr)
+                data.shift
+                temp.each do |dataValue|
+                    data.push(dataValue)
+                end
+                if data.include?([4, 4])
+                    binding.pry
+                    queue = false
+                    break
+                end
             end
         end
-        queue=[]
-        temp.each do |arr|
-            
+        puts "s"
+    end
 
-        root = Node.new(temp)
-        root.child = nextMove(temp, goal)
+    def getNext(arr)
+        temp = []
+        @possibilities.each do |num|
+            x = arr[0] + num[0]
+            y = arr[1] + num[1]
+            if @used.include?([x, y]) == false
+                temp.push([x, y])
+                @used.push([x, y])
+            end
+        end
+    return temp
     end
 
 end
 
 knight = Options.new
 
-p knight.nextMove([[4, 4]], [0,0])
+p knight.nextMove([[4, 4]], [1,1])
